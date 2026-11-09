@@ -111,6 +111,8 @@ Models/metadata/
 
 Projects/Remotion/node_modules/
 Projects/Remotion/output/
+Projects/Remotion/public/runs
+Projects/Remotion/src/experiments
 Projects/Remotion/.git/
 
 # =====================================

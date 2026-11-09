@@ -120,6 +120,19 @@ def pick_bucket(aspect: float) -> Tuple[int, int]:
     return min(BUCKETS, key=lambda size: abs(math.log(aspect / (size[0] / size[1]))))
 
 
+import re as _re
+
+CFG_OBJECT, CFG_PEOPLE = 4.5, 6.5
+_PEOPLE = _re.compile(r"\b(?:man|men|woman|women|person|people|portrait|face|faces|eye|eyes|crowd|soldiers?|workers?|"
+                      r"child|children|king|queen|emperor|merchant|craftsman|monk|priest)\b", _re.IGNORECASE)
+
+
+def _cfg_for(positive: str) -> float:
+    """Guidance: 4.5 for objects, places and illustrations (cleaner shapes, less gloss); 6.5 when the picture
+    shows a person, where skin needs the stronger pull. Chosen from the realism lab."""
+    return CFG_PEOPLE if _PEOPLE.search(positive) else CFG_OBJECT
+
+
 SAFETY_NEGATIVE = ("(nsfw:1.4)", "(nude:1.4)", "(naked:1.4)", "(topless:1.4)", "nipples", "breasts", "genitals",
                    "cleavage", "lingerie", "underwear", "erotic")
 
@@ -200,7 +213,7 @@ def _paths(items: List[Dict[str, Any]], images_dir: Path) -> Dict[str, Path]:
 
 def _signature(job: Dict[str, Any]) -> str:
     """A fingerprint of everything that decides how an image looks."""
-    data = {k: job[k] for k in ("positive", "negative", "width", "height", "seed", "denoise", "cutout")}
+    data = {k: job[k] for k in ("positive", "negative", "width", "height", "seed", "denoise", "cutout","cfg")}
     data["loras"] = [list(x) for x in job["loras"]]
     data["source"] = job["source_path"].name if job["source_path"] else ""
     return hashlib.sha1(json.dumps(data, sort_keys=True).encode("utf-8")).hexdigest()[:12]
@@ -247,7 +260,7 @@ def build_jobs(plan: Dict[str, Any], prompts: Dict[str, Dict[str, Any]], run_id:
         variation = item["source"] == "variation" and bool(item["base"])
         job = ({
             "media_id": item["media_id"], "mode": "variation" if variation else "new",
-            "path": paths[item["media_id"]], "cutout": item["cutout"], "positive": positive,
+            "path": paths[item["media_id"]], "cutout": item["cutout"], "cfg": _cfg_for(positive), "positive": positive,
             "negative": with_floor(str(prompt.get("negative", "")), safe), "loras": loras,
             "width": width, "height": height, "seed": _seed(run_id, item["media_id"]),
             "source_path": paths.get(item["base"]) if variation else None,
@@ -344,7 +357,7 @@ def run(jobs: List[Dict[str, Any]], *, only: Optional[List[str]] = None, limit: 
                 comfyui_api.generate(comfyui_api.ImageJob(
                     positive=job["positive"], negative=job["negative"], output_path=job["path"],
                     width=job["width"], height=job["height"], seed=job["seed"], checkpoint=CHECKPOINT,
-                    loras=job["loras"], source_image=job["source_path"], denoise=job["denoise"], **SAMPLER))
+                    loras=job["loras"], source_image=job["source_path"], denoise=job["denoise"], **{**SAMPLER, "cfg": job["cfg"]}))
                 if job["cutout"]:
                     comfyui_api.cutout(job["path"], _cut_path(job["path"]))
                 _record(job["mode"], time.monotonic() - started)
