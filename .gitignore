@@ -1,0 +1,220 @@
+# =====================================
+# Ignore top-level folders
+# =====================================
+
+.agents/
+.clinerules/
+.continue/
+Launcher/
+Venvs/
+
+# =====================================
+# Python
+# =====================================
+
+**/__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# =====================================
+# Node
+# =====================================
+
+**/node_modules/
+
+# =====================================
+# Build outputs
+# =====================================
+
+**/dist/
+**/build/
+**/out/
+
+# =====================================
+# Environment files
+# =====================================
+
+.env
+.env.*
+*.env
+!.env.example
+
+# =====================================
+# Secrets
+# =====================================
+
+*.key
+*.pem
+credentials.json
+api_keys.json
+secrets.json
+
+# =====================================
+# Windows
+# =====================================
+
+Thumbs.db
+Desktop.ini
+
+# =====================================
+# Temporary files
+# =====================================
+
+*.log
+.cache/
+temp/
+tmp/
+
+# =====================================
+# Ignore inspection files
+# =====================================
+
+status.txt
+git-status.txt
+ai_studio_overview.txt
+
+
+# =====================================
+# Models
+# =====================================
+
+# Ignore everything in Models
+Models/*
+
+# Allow F5-TTS folder itself
+!Models/F5-TTS/
+
+# Ignore everything inside F5-TTS
+Models/F5-TTS/*
+
+# Allow only ref_voices
+!Models/F5-TTS/ref_voices/
+
+# Track everything inside ref_voices
+!Models/F5-TTS/ref_voices/**
+
+# Explicitly ignore remaining F5-TTS folders
+Models/F5-TTS/hub/
+Models/F5-TTS/xet/
+Models/F5-TTS/.agent_harnesses.json
+
+# Ignore other model folders entirely
+Models/blobs/
+Models/Kokoro/
+Models/manifests/
+Models/metadata/
+
+# =====================================
+# Remotion
+# =====================================
+
+Projects/Remotion/node_modules/
+Projects/Remotion/output/
+Projects/Remotion/.git/
+
+# =====================================
+# ResearchAssistant
+# =====================================
+
+Projects/ResearchAssistant/__pycache__/
+
+# =====================================
+# Investigation files
+# =====================================
+
+ai_studio_tree.txt
+ai_studio_overview.txt
+status.txt
+git-status.txt
+
+# =====================================
+# Tools (legacy content)
+# =====================================
+
+Projects/Tools/agents/
+Projects/Tools/engines/
+Projects/Tools/legacy/
+Projects/Tools/venv/
+Projects/Tools/__pycache__/
+
+Projects/Tools/*.txt
+Projects/Tools/*.zip
+
+Projects/Tools/config.py
+Projects/Tools/main.py
+Projects/Tools/main_test.py
+Projects/Tools/orchestrator.py
+Projects/Tools/test_f5.py
+
+# =====================================
+# Kestrel Shorts - Phase 1 Exclusions
+# =====================================
+
+Projects/Tools/shorts/__pycache__/
+Projects/Tools/shorts/diagnostics/
+Projects/Tools/shorts/docs/
+Projects/Tools/shorts/runtime/
+Projects/Tools/shorts/tests/
+
+# =====================================
+# Kestrel Shorts - Agents
+# =====================================
+
+Projects/Tools/shorts/agents/legacy/
+Projects/Tools/shorts/agents/legacy_old/
+Projects/Tools/shorts/agents/__pycache__/
+
+# =====================================
+# Kestrel Shorts - App
+# =====================================
+
+Projects/Tools/shorts/app/legacy/
+Projects/Tools/shorts/app/__pycache__/
+
+# =====================================
+# Kestrel Shorts - Core
+# =====================================
+
+Projects/Tools/shorts/core/legacy/
+Projects/Tools/shorts/core/__pycache__/
+
+# =====================================
+# Kestrel Shorts - Legacy
+# =====================================
+
+Projects/Tools/shorts/**/legacy/
+Projects/Tools/shorts/**/legacy_old/
+
+# =====================================
+# Kestrel Shorts - Python Cache
+# =====================================
+
+Projects/Tools/shorts/**/__pycache__/
+
+# =====================================
+# Kestrel Shorts - Rendering Test Outputs
+# =====================================
+
+Projects/Tools/shorts/rendering/visual_director_smoke_test/
+
+# =====================================
+# Kestrel Shorts - Phase 1 Exclusions
+# =====================================
+
+Projects/Tools/shorts/diagnostics/
+Projects/Tools/shorts/docs/
+Projects/Tools/shorts/runtime/
+Projects/Tools/shorts/tests/
+
+# =====================================
+# Outputs exclusions
+# =====================================
+
+Outputs/cache/
+Outputs/vector_db/
+
+Outputs/readme.txt
+Outputs/webui.db
+Outputs/webui.db-shm
+Outputs/webui.db-wal

@@ -1,0 +1,57 @@
+﻿{
+  "V01": {
+    "id": "V01_Natural_Male",
+    "wav": "C:\\AI_Studio\\Models\\F5-TTS\\ref_voices\\V01_Natural_Male.wav",
+    "text": "Sheepmen called the azalea sheep poison, and wondered what the Creator was thinking about when He made it."
+  },
+  "V02": {
+    "id": "V02_Assertive_Male",
+    "wav": "C:\\AI_Studio\\Models\\F5-TTS\\ref_voices\\V02_Assertive_Male.wav",
+    "text": "The Time Traveller, for so it will be convenient to speak of him, was expounding a recondite matter to us."
+  },
+  "V03": {
+    "id": "V03_Professional_Female",
+    "wav": "C:\\AI_Studio\\Models\\F5-TTS\\ref_voices\\V03_Professional_Female.wav",
+    "text": "He's utterly incapable of running any of the machines. I've tried to teach him. The only things he can do are already done much better by robots."
+  },
+  "V04": {
+    "id": "V04_Deep_Calm_Male",
+    "wav": "C:\\AI_Studio\\Models\\F5-TTS\\ref_voices\\V04_Deep_Calm_Male.wav",
+    "text": "Back in High Falls, where he was born, he was physically weaker than sixty percent of the men, but stronger than sixty percent of the women."
+  },
+  "V06": {
+    "id": "V06_Husky_Male",
+    "wav": "C:\\AI_Studio\\Models\\F5-TTS\\ref_voices\\V06_Husky_Male.wav",
+    "text": "The very causality of his existence was a succession of brute obedience to brute awareness."
+  },
+  "V07": {
+    "id": "V07_Warm_Female",
+    "wav": "C:\\AI_Studio\\Models\\F5-TTS\\ref_voices\\V07_Warm_Female.wav",
+    "text": "Well, he was fifty-six, a mere stripling in a population whose average age was one hundred and twenty-nine."
+  },
+  "V08": {
+    "id": "V08_Analytical_Male",
+    "wav": "C:\\AI_Studio\\Models\\F5-TTS\\ref_voices\\V08_Analytical_Male.wav",
+    "text": "Each examination always entailed the cold end of a stethoscope against his chest."
+  },
+  "V09": {
+    "id": "V09_Formal_Male",
+    "wav": "C:\\AI_Studio\\Models\\F5-TTS\\ref_voices\\V09_Formal_Male.wav",
+    "text": "After all, some of the men who knew her private number were important. She undulated to the phone and pressed it accept."
+  },
+  "V10": {
+    "id": "V10_Youthful_Female",
+    "wav": "C:\\AI_Studio\\Models\\F5-TTS\\ref_voices\\V10_Youthful_Female.wav",
+    "text": "I found she was still sleeping. How I did wish to wake her up. But Teresa cautioned me to let her sleep as long as she wished on account of her long journey on the day before."
+  },
+  "V11": {
+    "id": "V11_Gravitas_Male",
+    "wav": "C:\\AI_Studio\\Models\\F5-TTS\\ref_voices\\V11_Gravitas_Male.wav",
+    "text": "Till the dirges of his Hope that melancholy burden bore of 'Neverâ€”nevermore.'"
+  },
+  "V12": {
+    "id": "V12_Cinematic_Male",
+    "wav": "C:\\AI_Studio\\Models\\F5-TTS\\ref_voices\\V12_Cinematic_Male.wav",
+    "text": "Mr. Utterson the lawyer was a man of a rugged countenance that was never lighted by a smile."
+  }
+}

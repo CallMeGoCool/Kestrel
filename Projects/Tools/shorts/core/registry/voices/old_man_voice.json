@@ -1,0 +1,17 @@
+{
+  "schema_version": "1.0",
+  "voice_profile_id": "old_man_voice",
+  "character_id": "old_man",
+  "provider": "F5-TTS",
+  "reference_audio": "ref_voices/V06_Husky_Male.wav",
+  "ref_text": "The very causality of his existence was a succession of brute obedience to brute awareness.",
+  "language": "en",
+  "voice_description": "Calm, warm, mature male voice suited to a loving and thoughtful storyteller.",
+  "generation_settings": {
+    "use_engine_defaults": true
+  },
+  "metadata": {
+    "prototype": true,
+    "notes": "reference_audio is relative to F5_TTS_MODEL_DIR. Empty ref_text means F5-TTS auto-transcribes the clip."
+  }
+}

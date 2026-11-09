@@ -1,0 +1,16 @@
+{
+  "schema_version": "1.0",
+  "voice_profile_id": "old_woman_voice",
+  "character_id": "old_woman",
+  "provider": "F5-TTS",
+  "reference_audio": "ref_voices/V03_Professional_Female.wav",
+  "ref_text": "He's utterly incapable of running any of the machines. I've tried to teach him. The only things he can do are already done much better by robots.",
+  "language": "en",
+  "voice_description": "Clear, composed, professional female voice with a lively, direct delivery.",
+  "generation_settings": {
+    "use_engine_defaults": true
+  },
+  "metadata": {
+    "prototype": true
+  }
+}

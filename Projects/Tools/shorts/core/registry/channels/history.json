@@ -1,0 +1,17 @@
+﻿{
+  "schema_version": "1.0",
+  "channel_id": "history",
+  "name": "History",
+  "description": "Historical discoveries, people, civilizations, events and mysteries.",
+  "family_id": "history",
+  "world_ids": ["ancient_history"],
+  "available_character_ids": ["old_man", "old_woman"],
+  "audience": "General public with a mild interest in history; knows famous figures and basic ideas.",
+  "reading_grade": 8,
+  "avatar_presence": "constant",
+  "storytelling_style": ["accessible", "story-driven", "historically grounded"],
+  "default_visual_style": "historical_reconstruction",
+  "theme_id": "vox_history",
+  "visual_identity": "Grounded, documentary-feel reconstructions of the past: natural light, earthy muted colours, weathered stone, wood, cloth and metal, period-accurate objects. Serious and curious; never cartoonish, never fantasy, no modern objects.",
+  "metadata": {"prototype": true}
+}

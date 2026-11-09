@@ -1,0 +1,34 @@
+﻿{
+  "schema_version": "1.0",
+  "theme_id": "vox_history",
+  "name": "Vox-style history",
+  "description": "Documentary explainer look: dark charcoal canvas, warm cream text, ochre accent, cut-out subjects with paper edges.",
+  "format": "explainer_vox",
+  "format_hints": "Few images per scene. Cut-out subjects over flat or textured backdrops. Tables, flows, charts, big numbers and highlighted text carry the explanation. Quick cuts on key words. Avatars only now and then.",
+  "palette": {
+    "background": "#14161B",
+    "surface": "#1E222B",
+    "text": "#F3EEE3",
+    "muted": "#9AA0AA",
+    "accent": "#E3A93B",
+    "accent_alt": "#C4553A",
+    "highlight": "#FFD95A"
+  },
+  "typography": {
+    "heading": {"file": "Inter_28pt-Bold.ttf"},
+    "body": {"file": "Inter_28pt-Medium.ttf"},
+    "numbers": {"file": "Inter_28pt-Bold.ttf"}
+  },
+  "motion": {
+    "image": ["slow_zoom_in", "slow_zoom_out", "drift", "pan_left", "pan_right"],
+    "text": ["pop", "slide_up", "fade"],
+    "easing": "ease_in_out_cubic",
+    "pace": "snappy"
+  },
+  "transitions": ["cut", "slide", "wipe", "page_tear", "fade"],
+  "overlays": ["grain", "paper_texture", "vignette"],
+  "image_treatment": {"grade": "warm_muted", "grain": 0.3, "cutout_edge": "paper"},
+  "audio": {"music_mood": ["documentary", "curious"], "sfx_density": "medium"},
+  "subtitles": {"style": "regular", "kinetic_max_share": 0.2, "kinetic_max_run": 1},
+  "metadata": {"prototype": true}
+}

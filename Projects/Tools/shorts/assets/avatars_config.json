@@ -1,0 +1,219 @@
+{
+  "version": "1.0",
+  "avatars_root": "avatars",
+
+  "characters": {
+    "dragons": {
+      "dragon_child_1": {
+        "display_name": "Dragon Child",
+        "visual_style": "2d_storybook_chibi",
+        "color_mode": "color",
+        "canonical": "avatars/dragons/canonical/dragon_child_1.png",
+        "poses": "avatars/dragons/poses/dragon_child_1",
+        "source": "avatars/dragons/source/Dragon Child.png"
+      },
+
+      "dragon_parent_1": {
+        "display_name": "Dragon Parent",
+        "visual_style": "2d_storybook_fantasy",
+        "color_mode": "color",
+        "canonical": "avatars/dragons/canonical/dragon_parent_1.png",
+        "poses": "avatars/dragons/poses/dragon_parent_1",
+        "source": "avatars/dragons/source/Dragon Parent.png"
+      }
+    },
+
+    "forge": {
+      "dwarf_man_1": {
+        "display_name": "Dwarf Forge Master",
+        "visual_style": "2d_fantasy_cartoon",
+        "color_mode": "color",
+        "canonical": "avatars/forge/canonical/dwarf_man_1.png",
+        "poses": "avatars/forge/poses/dwarf_man_1",
+        "source": "avatars/forge/source/Dwarf - Man.png"
+      }
+    },
+
+    "genius": {
+      "genius_female": {
+        "display_name": "Barely Functional Genius - Female",
+        "visual_style": "2d_cel_shaded_anime",
+        "color_mode": "color",
+        "canonical": "avatars/genius/canonical/genius_female.png",
+        "poses": "avatars/genius/poses/genius_female",
+        "source": [
+          "avatars/genius/source/Barely Functional Genius - Female 1.png",
+          "avatars/genius/source/Barely Functional Genius - Female 2.png"
+        ]
+      },
+
+      "genius_male": {
+        "display_name": "Barely Functional Genius - Male",
+        "visual_style": "2d_cel_shaded_anime",
+        "color_mode": "color",
+        "canonical": "avatars/genius/canonical/genius_male.png",
+        "poses": "avatars/genius/poses/genius_male",
+        "source": "avatars/genius/source/Barely Functional Genius - Male 2.png"
+      }
+    },
+
+    "guests": {
+      "boy_1": {
+        "display_name": "Young Explorer Boy",
+        "visual_style": "2d_anime_adventure",
+        "color_mode": "color",
+        "canonical": "avatars/guests/canonical/boy_1.png",
+        "poses": "avatars/guests/poses/boy_1",
+        "source": "avatars/guests/source/Young boy utility jacket.png"
+      },
+
+      "girl_1": {
+        "display_name": "Young Explorer Girl",
+        "visual_style": "2d_anime_adventure",
+        "color_mode": "color",
+        "canonical": "avatars/guests/canonical/girl_1.png",
+        "poses": "avatars/guests/poses/girl_1",
+        "source": "avatars/guests/source/Young girl utility jacket.png"
+      }
+    },
+
+    "history": {
+      "old_man": {
+        "display_name": "Historian - Old Man",
+        "visual_style": "2d_storybook",
+        "color_mode": "color",
+        "canonical": "avatars/history/canonical/old_man.png",
+        "poses": "avatars/history/poses/old_man",
+        "source": "avatars/history/source/Historian - Old Man.png"
+      },
+
+      "old_woman": {
+        "display_name": "Historian - Old Woman",
+        "visual_style": "2d_storybook",
+        "color_mode": "color",
+        "canonical": "avatars/history/canonical/old_woman.png",
+        "poses": "avatars/history/poses/old_woman",
+        "source": "avatars/history/source/Historian - Old Woman.png"
+      }
+    },
+
+    "mystery": {
+      "noir_detective_man_1": {
+        "display_name": "Noir Detective",
+        "visual_style": "2d_cinematic_noir",
+        "color_mode": "color",
+        "canonical": "avatars/mystery/canonical/noir_detective_man_1.png",
+        "poses": "avatars/mystery/poses/noir_detective_man_1",
+        "source": "avatars/mystery/source/Noir Detective 3.png"
+      },
+
+      "noir_detective_man_2": {
+        "display_name": "Noir Detective - Alternate",
+        "visual_style": "2d_cinematic_noir",
+        "color_mode": "color",
+        "canonical": "avatars/mystery/canonical/noir_detective_man_2.png",
+        "poses": "avatars/mystery/poses/noir_detective_man_2",
+        "source": "avatars/mystery/source/Noir Detective 2.png"
+      },
+
+      "noir_detective_woman_1": {
+        "display_name": "Noir Detective - Female",
+        "visual_style": "2d_cinematic_noir",
+        "color_mode": "color",
+        "canonical": "avatars/mystery/canonical/noir_detective_woman_1.png",
+        "poses": "avatars/mystery/poses/noir_detective_woman_1",
+        "source": "avatars/mystery/source/Noir Detective Female.png"
+      }
+    },
+
+    "mythology": {
+      "witch_female_1": {
+        "display_name": "Witch - Female",
+        "visual_style": "2d_fantasy_anime",
+        "color_mode": "color",
+        "canonical": "avatars/mythology/canonical/witch_female_1.png",
+        "poses": "avatars/mythology/poses/witch_female_1",
+        "source": "avatars/mythology/source/Witch - Female 2.png"
+      },
+
+      "witch_male_1": {
+        "display_name": "Witch - Male",
+        "visual_style": "2d_fantasy_anime",
+        "color_mode": "color",
+        "canonical": "avatars/mythology/canonical/witch_male_1.png",
+        "poses": "avatars/mythology/poses/witch_male_1",
+        "source": [
+          "avatars/mythology/source/Witch - Male 2.png",
+          "avatars/mythology/source/Witch - Male.png"
+        ]
+      }
+    },
+
+    "science": {
+      "scientist_female_1": {
+        "display_name": "Field Scientist - Female",
+        "visual_style": "2d_manwha",
+        "color_mode": "color",
+        "canonical": "avatars/science/canonical/scientist_female_1.png",
+        "poses": "avatars/science/poses/scientist_female_1",
+        "source": "avatars/science/source/Field Scientist - Female 1.png"
+      },
+
+      "scientist_female_2": {
+        "display_name": "Field Scientist - Female Monochrome",
+        "visual_style": "2d_graphic_novel",
+        "color_mode": "monochrome",
+        "canonical": "avatars/science/canonical/scientist_female_2.png",
+        "poses": "avatars/science/poses/scientist_female_2",
+        "source": "avatars/science/source/Field Scientist - Female 2.png"
+      },
+
+      "scientist_male_1": {
+        "display_name": "Field Scientist - Male A",
+        "visual_style": "2d_manwha",
+        "color_mode": "color",
+        "canonical": "avatars/science/canonical/scientist_male_1.png",
+        "poses": "avatars/science/poses/scientist_male_1",
+        "source": "avatars/science/source/Field Scientist - Male 1.png"
+      },
+
+      "scientist_male_2": {
+        "display_name": "Field Scientist - Male Monochrome",
+        "visual_style": "2d_graphic_novel",
+        "color_mode": "monochrome",
+        "canonical": "avatars/science/canonical/scientist_male_2.png",
+        "poses": "avatars/science/poses/scientist_male_2",
+        "source": "avatars/science/source/Field Scientist - Male 2.png"
+      },
+
+      "scientist_male_3": {
+        "display_name": "Field Scientist - Male B",
+        "visual_style": "2d_manwha",
+        "color_mode": "color",
+        "canonical": "avatars/science/canonical/scientist_male_3.png",
+        "poses": "avatars/science/poses/scientist_male_3",
+        "source": "avatars/science/source/Field Scientist - Male 3.png"
+      }
+    },
+
+    "survival": {
+      "explorer_female": {
+        "display_name": "Explorer - Female",
+        "visual_style": "2d_adventure_anime",
+        "color_mode": "color",
+        "canonical": "avatars/survival/canonical/explorer_female.png",
+        "poses": "avatars/survival/poses/explorer_female",
+        "source": "avatars/survival/source/Explorer - Young Adult Woman.png"
+      },
+
+      "explorer_male": {
+        "display_name": "Explorer - Male",
+        "visual_style": "2d_adventure_manwha",
+        "color_mode": "color",
+        "canonical": "avatars/survival/canonical/explorer_male.png",
+        "poses": "avatars/survival/poses/explorer_male",
+        "source": "avatars/survival/source/Explorer - Adult Man.png"
+      }
+    }
+  }
+}

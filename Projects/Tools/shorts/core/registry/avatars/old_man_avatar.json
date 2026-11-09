@@ -1,0 +1,16 @@
+﻿{
+  "schema_version": "1.0",
+  "avatar_id": "old_man_avatar",
+  "character_id": "old_man",
+  "display_name": "Old Man Avatar",
+  "assets": {
+    "canonical_image": "avatars/history/canonical/old_man.png",
+    "poses_directory": "avatars/history/poses/old_man"
+  },
+  "default_pose": "old_man_default",
+  "poses": [
+    {"pose_id": "old_man_default", "file": "old_man_default.png", "description": "standing, relaxed, neutral expression"},
+    {"pose_id": "old_man_book", "file": "old_man_book.png", "description": "holding an open book"}
+  ],
+  "metadata": {"prototype": true, "notes": "The canonical image is the identity reference; scenes use poses. old_man_default is the twin of the canonical image."}
+}

@@ -1,0 +1,30 @@
+﻿{
+  "schema_version": "1.0",
+  "world_id": "ancient_history",
+  "name": "Ancient History",
+  "description": "A grounded historical storytelling world.",
+  "visual_identity": "Ancient settings: handmade tools, clay, bronze, linen and carved stone; warm daylight, firelight or soft dawn light; ruins, workshops and wide landscapes; calm and contemplative, no anachronisms.",
+  "environment": {
+    "setting": "A peaceful hut in a valley in the Alps",
+    "time_of_day": "serene morning",
+    "atmosphere": ["peaceful", "warm", "serene", "contemplative"],
+    "background_theme": "A quiet Alpine valley, soft morning light, distant mountains, and a welcoming rustic hut.",
+    "environmental_conventions": [
+      "Maintain a peaceful and coherent environment.",
+      "Keep backgrounds appropriate to the current story.",
+      "Use the Alpine hut as the prototype narration setting rather than forcing it into every historical reconstruction."
+    ]
+  },
+  "storytelling_conventions": [
+    "Explain historical subjects clearly.",
+    "Reveal discoveries progressively.",
+    "Allow reflective moments without slowing the story unnecessarily.",
+    "Distinguish historical evidence from speculation."
+  ],
+  "image_generation_guidance": {
+    "preserve_world_consistency": true,
+    "background_theme": "peaceful Alpine hut and valley during a serene morning",
+    "additional_constraints": []
+  },
+  "metadata": {"prototype": true}
+}

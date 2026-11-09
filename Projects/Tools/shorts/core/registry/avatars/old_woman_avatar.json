@@ -1,0 +1,15 @@
+﻿{
+  "schema_version": "1.0",
+  "avatar_id": "old_woman_avatar",
+  "character_id": "old_woman",
+  "display_name": "Old Woman Avatar",
+  "assets": {
+    "canonical_image": "avatars/history/canonical/old_woman.png",
+    "poses_directory": "avatars/history/poses/old_woman"
+  },
+  "default_pose": "old_woman_default",
+  "poses": [
+    {"pose_id": "old_woman_default", "file": "old_woman_default.png", "description": "standing, relaxed, neutral expression"}
+  ],
+  "metadata": {"prototype": true}
+}

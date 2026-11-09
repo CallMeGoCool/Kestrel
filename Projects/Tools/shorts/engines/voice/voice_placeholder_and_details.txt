@@ -1,0 +1,837 @@
+"""
+KESTREL SHORTS — VOICE ENGINE
+=============================
+
+STATUS: PLACEHOLDER / DESIGN SPECIFICATION ONLY
+
+## PURPOSE
+
+This file documents the intended responsibilities, capabilities, vocabulary,
+and implementation requirements of the future Kestrel Shorts Voice Engine.
+
+It is documentation only. It must not load a TTS model, generate audio,
+modify text, or execute voice-generation operations in its current state.
+
+When implementation begins, this specification should guide the design of
+the real Voice Engine and its interface with the Story Director.
+
+## CORE ARCHITECTURAL PRINCIPLE
+
+The Story Director decides HOW a section should feel and be delivered.
+
+The Voice Engine decides HOW to produce that delivery using available
+text-to-speech backends, prosody controls, timing adjustments, and audio
+processing techniques.
+
+The Story Director must not need to know backend-specific settings such as
+numeric speed multipliers, model parameters, pitch values, or pause durations
+in milliseconds.
+
+For example:
+
+```
+Story Director:
+    delivery_style = "reflective"
+    emotion = "curiosity"
+    intensity = "restrained"
+    pace = "measured"
+
+Voice Engine:
+    Interprets these directions and maps them to appropriate backend
+    settings, text segmentation, emphasis, pauses, and other supported
+    speech-generation techniques.
+```
+
+The mapping from creative direction to implementation must be owned by
+the Voice Engine, not duplicated across the Story Director.
+
+The Story Director should select from an explicit, documented vocabulary
+of supported voice directions. The Voice Engine must validate those
+directions and define how each one should sound.
+
+============================================================
+
+1. DELIVERY STYLES
+   ============================================================
+
+## PURPOSE
+
+Delivery style describes the overall manner in which the narration is
+performed. It is the broadest voice-direction category.
+
+## PROPOSED OPTIONS
+
+1. conversational
+   Natural, approachable, and similar to a person explaining something
+   directly to another person.
+
+2. storytelling
+   Narratively engaging delivery that guides the listener through events,
+   discoveries, or a sequence of ideas.
+
+3. reflective
+   Thoughtful, measured delivery that gives ideas room to resonate.
+
+4. dramatic
+   Deliberate, expressive delivery intended to heighten the significance
+   of an event, revelation, or narrative moment.
+
+5. documentary
+   Clear, composed, informative delivery suitable for factual narration.
+
+6. investigative
+   Focused delivery that conveys examination, questioning, or the gradual
+   uncovering of information.
+
+7. suspenseful
+   Controlled delivery that creates anticipation without unnecessarily
+   exaggerating the material.
+
+8. intimate
+   Close, personal delivery that feels direct and emotionally connected.
+
+9. authoritative
+   Confident, composed delivery suited to established explanations or
+   clearly supported conclusions.
+
+10. playful
+    Light, expressive delivery suited to humorous, whimsical, or playful
+    material.
+
+11. urgent
+    Forward-moving delivery that communicates time pressure or immediate
+    importance.
+
+12. solemn
+    Restrained, serious delivery suited to tragic, grave, or weighty
+    material.
+
+13. soothing
+    Gentle, calming delivery intended to reduce tension or create a relaxed
+    listening experience.
+
+14. energetic
+    Lively delivery with a strong sense of momentum.
+
+15. whispered
+    A quiet or whisper-like delivery, only where the selected TTS backend
+    can support it convincingly.
+
+16. deadpan
+    Deliberately understated, emotionally restrained delivery, often useful
+    for dry humor or ironic narration.
+
+## IMPLEMENTATION REQUIREMENTS
+
+* These options are proposed vocabulary, not yet a final fixed list.
+* Each option must have a clear definition and intended use.
+* The Voice Engine must document how each style maps to supported controls.
+* Different styles may share some implementation settings while retaining
+  different creative meanings.
+* A style must not promise an effect that the selected backend cannot
+  produce.
+* Unsupported styles must trigger a documented fallback rather than silently
+  pretending that the requested effect was achieved.
+
+============================================================
+2. EMOTIONS
+===========
+
+## PURPOSE
+
+Emotion describes the emotional quality that should be communicated through
+the voice.
+
+Emotion is distinct from delivery style. For example, documentary delivery
+can communicate curiosity, sadness, wonder, or concern.
+
+## PROPOSED OPTIONS
+
+1. neutral
+2. curiosity
+3. wonder
+4. excitement
+5. joy
+6. sadness
+7. concern
+8. fear
+9. anger
+10. frustration
+11. determination
+12. confidence
+13. uncertainty
+14. relief
+15. nostalgia
+16. admiration
+17. empathy
+18. amusement
+19. anticipation
+20. reverence
+21. melancholy
+22. hopefulness
+23. surprise
+24. tension
+25. compassion
+
+## IMPLEMENTATION REQUIREMENTS
+
+* Define each emotion in terms of its intended vocal impression.
+* Distinguish emotion from intensity: sadness can be subtle or strong.
+* Distinguish emotion from delivery style: a reflective passage can express
+  hopefulness, melancholy, curiosity, or several of these across sections.
+* Emotion should influence vocal delivery without changing the factual
+  meaning of the script.
+* Avoid automatically assigning strong emotional delivery to every sentence.
+* Preserve emotional continuity across connected sections where appropriate.
+* Do not assume that every emotion can be directly synthesized by every
+  TTS backend. Some effects may require indirect techniques or may not be
+  reproducible reliably.
+
+============================================================
+3. INTENSITY
+============
+
+## PURPOSE
+
+Intensity describes how strongly the selected delivery style or emotion
+should be expressed.
+
+## PROPOSED OPTIONS
+
+1. subtle
+   Barely pronounced expressive coloring; natural and understated.
+
+2. restrained
+   Clearly intentional but controlled expression.
+
+3. moderate
+   Noticeable expression without dominating the narration.
+
+4. strong
+   Prominent expression suited to an important narrative moment.
+
+5. extreme
+   Highly pronounced expression, reserved for exceptional moments.
+
+## IMPLEMENTATION REQUIREMENTS
+
+* Intensity must not be treated as a synonym for loudness.
+* It may affect the strength of supported expressive controls, emphasis,
+  pacing, or other appropriate techniques.
+* Strong intensity must not automatically mean faster speech.
+* Restrained intensity must not automatically mean whispering.
+* Extreme intensity should be used sparingly.
+* The engine must define safe and natural defaults for each style/emotion
+  combination.
+
+============================================================
+4. PACE AND RHYTHM
+==================
+
+## PURPOSE
+
+Pace describes the perceived speed and forward movement of the narration.
+
+## PROPOSED OPTIONS
+
+1. very_slow
+   Deliberate delivery for exceptional emphasis, solemnity, or contemplation.
+
+2. slow
+   Slower delivery that allows the listener to absorb information.
+
+3. measured
+   Controlled, deliberate delivery with clear phrasing and natural space.
+
+4. natural
+   Balanced conversational pacing.
+
+5. brisk
+   Lively forward movement while retaining intelligibility.
+
+6. fast
+   Rapid delivery for suitable material that benefits from urgency or energy.
+
+7. very_fast
+   Exceptional rapid delivery; must not be used if intelligibility suffers.
+
+## RELATED RHYTHM CONCEPTS
+
+The engine should distinguish:
+
+* Speaking pace: how quickly words are spoken.
+* Phrase rhythm: how words are grouped and connected.
+* Pausing: where speech stops and resumes.
+* Articulation: how clearly and distinctly sounds and words are formed.
+* Emphasis: which words or phrases receive additional attention.
+* Energy: how much forward momentum the delivery conveys.
+
+## IMPLEMENTATION REQUIREMENTS
+
+* The Story Director chooses a descriptive pace, not a numeric speed value.
+* The Voice Engine maps descriptive pace to backend-specific settings.
+* Speed adjustments must respect the capabilities and limitations of each
+  backend.
+* Do not assume all TTS systems use the same speed scale or parameter.
+* The engine should avoid extreme changes that make speech unnatural.
+* Pace should be interpreted alongside delivery style, emotion, intensity,
+  and sentence structure.
+* A section's pace may be adjusted carefully around emphasis or pauses.
+* Any automatic pace adjustment must preserve intelligibility.
+
+============================================================
+5. VOCAL CHARACTER AND TONAL QUALITY
+====================================
+
+## PURPOSE
+
+This category describes the intended perceived character of the voice,
+separate from the identity of the selected voice.
+
+## PROPOSED DESCRIPTORS
+
+* warm
+* cool
+* bright
+* dark
+* gentle
+* firm
+* airy
+* crisp
+* smooth
+* rough
+* resonant
+* soft
+* assertive
+* breathy
+* intimate
+* formal
+* relaxed
+* expressive
+* understated
+* neutral
+
+## IMPORTANT DISTINCTION
+
+These are desired perceptual qualities, not guaranteed low-level controls.
+
+For example, "warm" does not necessarily correspond to one pitch value,
+and "bright" does not necessarily correspond to one equalization setting.
+
+## IMPLEMENTATION REQUIREMENTS
+
+* Document which qualities can be produced directly by each backend.
+* Document which qualities can only be approximated.
+* Do not invent unsupported parameters merely because a descriptor exists.
+* Avoid aggressive audio processing that changes voice identity or creates
+  unnatural artifacts.
+* Keep voice identity and vocal characterization as separate concepts.
+
+============================================================
+6. EMPHASIS
+===========
+
+## PURPOSE
+
+Emphasis identifies a word or phrase that deserves additional listener
+attention.
+
+The Story Director should identify WHAT deserves emphasis. The Voice Engine
+decides HOW to realize that emphasis.
+
+## CONCEPTUAL STRUCTURE
+
+Each emphasis instruction should contain:
+
+* target: the exact word or phrase to emphasize
+* strength: the desired degree of emphasis
+* optional reason or semantic intent, if useful to the architecture
+
+## PROPOSED STRENGTH OPTIONS
+
+1. light
+   Subtle emphasis that should not distract from the sentence.
+
+2. moderate
+   Noticeable emphasis that draws attention to the selected target.
+
+3. strong
+   Prominent emphasis reserved for particularly significant words or phrases.
+
+## PROPOSED EMPHASIS TECHNIQUES
+
+Depending on backend capabilities, emphasis may be achieved through:
+
+* contextual text segmentation
+* supported speech-style or emotion conditioning
+* changes in local pacing
+* changes in phrase boundaries
+* controlled pauses around a target
+* supported prosodic controls
+* carefully selected punctuation, where appropriate
+* backend-specific expressive controls
+* optional audio processing, if safe and useful
+
+## IMPLEMENTATION REQUIREMENTS
+
+* Verify that the target actually occurs in the spoken text.
+* Handle repeated target phrases unambiguously.
+* Define whether matching is case-sensitive.
+* Define how punctuation adjacent to a target is handled.
+* Do not silently apply emphasis to a different word if matching fails.
+* Limit excessive emphasis instructions within one section.
+* Avoid applying several competing techniques to the same word without
+  a defined precedence rule.
+* Preserve the original spoken wording unless a separate text-editing
+  stage explicitly authorizes a change.
+* Do not insert spoken meta-instructions such as "emphasize this word."
+* If a backend cannot reliably emphasize a target, use a documented fallback
+  or report that the effect is unsupported.
+
+============================================================
+7. PAUSES AND SILENCE
+=====================
+
+## PURPOSE
+
+Pause instructions control where intentional silence should occur and what
+that silence is meant to accomplish.
+
+The Story Director chooses a meaningful pause location and its intended
+length category. The Voice Engine translates this into actual timing.
+
+## PROPOSED PAUSE LOCATIONS
+
+1. before_phrase
+2. after_phrase
+3. before_sentence
+4. after_sentence
+5. between_sentences
+6. before_emphasis
+7. after_emphasis
+8. before_revelation
+9. after_revelation
+10. between_narrative_beats
+
+These are semantic positions. The implementation must define exactly how
+each position is anchored to the spoken text.
+
+## PROPOSED PAUSE DURATIONS
+
+1. micro
+   A very brief separation, where a small break is sufficient.
+
+2. short
+   A light pause that helps phrase boundaries feel natural.
+
+3. medium
+   A clearly perceptible pause that allows an idea to settle.
+
+4. long
+   An extended pause for a meaningful dramatic, emotional, or narrative beat.
+
+5. extended
+   A rare, substantial silence used only when the scene truly benefits.
+
+## IMPLEMENTATION REQUIREMENTS
+
+* The Story Director must not specify milliseconds.
+* The Voice Engine defines the actual duration associated with each category.
+* Duration mappings may vary by delivery style or backend.
+* The engine must define precedence when pause instructions overlap.
+* The engine must define how pauses interact with punctuation and natural
+  pauses already produced by the TTS model.
+* Avoid creating awkward double pauses.
+* Define whether a pause is inserted before or after the exact matched text.
+* Define behavior when a pause anchor cannot be found.
+* Keep the final audio duration within reasonable limits.
+* Avoid excessive pauses that make narration feel fragmented.
+* Explicit silence must be distinguishable from naturally occurring silence
+  in the generated audio where possible.
+
+============================================================
+8. PRONUNCIATION AND ARTICULATION
+=================================
+
+## PURPOSE
+
+This category concerns the clarity and manner in which spoken words are
+articulated.
+
+## PROPOSED DESCRIPTORS
+
+* natural
+* crisp
+* precise
+* relaxed
+* deliberate
+* conversational
+* careful
+* softened
+
+## POTENTIAL CAPABILITIES
+
+The future implementation may support:
+
+* pronunciation dictionaries
+* custom pronunciations for names and unusual terms
+* phonetic overrides where supported
+* language and locale selection
+* acronym pronunciation rules
+* number, date, and abbreviation normalization
+* pronunciation consistency across a complete video
+* preservation of character and place-name pronunciations
+* validation of text normalization before synthesis
+
+## IMPLEMENTATION REQUIREMENTS
+
+* Do not alter factual wording simply to make pronunciation easier.
+* Keep spoken-text normalization separate from script content.
+* Preserve a traceable relationship between source text and spoken output.
+* Avoid inconsistent pronunciation of the same name across sections.
+* Document which features belong to text preprocessing and which belong
+  to the TTS backend.
+
+============================================================
+9. CHARACTER VOICE IDENTITY
+===========================
+
+## PURPOSE
+
+Voice identity defines WHO is speaking. Delivery style and emotion define
+HOW that voice speaks in a particular section.
+
+Potential identity attributes include:
+
+* registered voice or speaker ID
+* selected TTS voice
+* reference audio, where supported and authorized
+* language and locale
+* stable pronunciation preferences
+* stable character-specific vocal traits
+* backend compatibility requirements
+
+## IMPLEMENTATION REQUIREMENTS
+
+* Use the existing character and registry architecture where applicable.
+* Do not hardcode channel-specific character identities inside generic
+  prosody logic.
+* Do not treat emotion or delivery style as a replacement for speaker identity.
+* Keep a character's stable voice identity consistent across sections.
+* Allow moment-to-moment emotional and delivery changes without unintentionally
+  changing the identity of the speaker.
+* Validate that the chosen voice is available to the selected backend.
+* Define clear fallback behavior when a voice is unavailable.
+
+============================================================
+10. BACKEND CAPABILITIES AND ADAPTERS
+=====================================
+
+## PURPOSE
+
+The Voice Engine should expose one stable, backend-independent interface to
+the rest of Kestrel Shorts while allowing different TTS systems to have
+different implementation details.
+
+## PLANNED BACKENDS
+
+Primary: F5-TTS
+Fallback: Kokoro
+
+These are architectural preferences. Their exact interfaces and capabilities
+must be inspected and verified during implementation.
+
+## REQUIRED DESIGN
+
+1. Backend-independent voice directions
+
+   The Story Director should use shared descriptors such as "reflective",
+   "curiosity", "restrained", "measured", "moderate", and "medium".
+
+2. Backend-specific adapters
+
+   Each backend adapter should translate supported directions into the
+   actual parameters and operations available to that backend.
+
+3. Capability declaration
+
+   Each backend should declare which features it supports directly, which
+   it can approximate, and which it cannot support.
+
+4. Safe fallback
+
+   Unsupported directions must degrade gracefully or produce a clear
+   diagnostic. They must not be silently misrepresented as fully supported.
+
+5. Consistent external interface
+
+   The Story Director should not need separate instructions for F5-TTS and
+   Kokoro.
+
+6. Capability-aware behavior
+
+   The engine should know whether a feature can be implemented by the current
+   backend before attempting to apply it.
+
+## POTENTIAL CAPABILITY CATEGORIES
+
+* voice selection
+* voice/reference conditioning
+* language and locale
+* delivery-style interpretation
+* emotion interpretation
+* intensity
+* pace and speed
+* emphasis
+* pause insertion
+* pronunciation overrides
+* text segmentation
+* speaker consistency
+* audio concatenation
+* silence insertion
+* output format and sample rate
+* duration measurement
+* audio-quality checks
+* diagnostics and error reporting
+
+Do not assume that every backend implements these capabilities in the same
+way. Confirm them from the actual installed API and inference implementation.
+
+============================================================
+11. COMBINING VOICE DIRECTIONS
+==============================
+
+## PURPOSE
+
+The Voice Engine must define how several creative directions interact.
+
+## EXAMPLE
+
+```
+delivery_style: reflective
+emotion: curiosity
+intensity: restrained
+pace: measured
+```
+
+These instructions should combine into a coherent delivery rather than four
+independent effects fighting each other.
+
+## IMPORTANT COMBINATIONS TO CONSIDER
+
+* style + emotion
+* emotion + intensity
+* pace + pauses
+* pace + emphasis
+* emphasis + pauses
+* character identity + emotion
+* character identity + delivery style
+* local emphasis + overall pace
+* narrative continuity across adjacent sections
+* section-level directions + phrase-level directions
+
+## IMPLEMENTATION REQUIREMENTS
+
+* Define precedence when instructions conflict.
+* Define safe defaults for omitted fields.
+* Prevent unsupported or contradictory combinations where appropriate.
+* Avoid mechanically applying every available effect.
+* Apply only those local effects that serve the intended delivery.
+* Preserve intelligibility and naturalness as primary constraints.
+* Allow restrained variation between sections without unnecessary inconsistency.
+
+============================================================
+12. DIRECTION SCOPE
+===================
+
+The future interface should distinguish between three levels.
+
+A. SECTION-LEVEL DIRECTIONS
+
+These define the overall delivery of a script section.
+
+Examples:
+
+* delivery style
+* dominant emotion
+* intensity
+* pace
+* broad vocal characterization
+
+B. PHRASE-LEVEL DIRECTIONS
+
+These affect a specific phrase or local narrative moment.
+
+Examples:
+
+* emphasis target
+* local pause
+* brief change in delivery
+* localized expressive instruction
+
+C. WORD-LEVEL DIRECTIONS
+
+These are fine-grained instructions and should be used sparingly.
+
+Examples:
+
+* emphasis on a particular word
+* custom pronunciation for a specific term
+* a precisely anchored pause around a word
+
+The Story Director should generally work at the section level and add local
+instructions only when they materially improve the narration.
+
+The Voice Engine should own the detailed implementation of those directions.
+
+============================================================
+13. VALIDATION AND DEFAULTS
+===========================
+
+The eventual implementation must validate all incoming voice directions.
+
+Required checks include:
+
+* Is the requested delivery style supported by the schema?
+* Is the requested emotion supported by the schema?
+* Is the intensity value valid?
+* Is the pace value valid?
+* Is the emphasis strength valid?
+* Is the pause location valid?
+* Is the pause duration valid?
+* Does the emphasis target occur in the text?
+* Can the pause anchor be resolved?
+* Does the selected backend support or approximate the requested features?
+* Are any instructions contradictory or redundant?
+* Are all required fields present?
+* Can missing optional fields safely use defaults?
+
+Validation must happen in code, not solely in the Story Director's prompt.
+
+The engine should distinguish:
+
+* invalid directions
+* valid directions unsupported by a backend
+* valid directions approximated by a backend
+* successfully applied directions
+* directions ignored because they were unnecessary or redundant
+
+Where useful, diagnostics should explain what happened.
+
+============================================================
+14. AUDIO QUALITY AND SAFETY
+============================
+
+The final engine should prioritize:
+
+* intelligibility
+* natural-sounding speech
+* consistent voice identity
+* correct text-to-audio correspondence
+* stable pronunciation
+* absence of unintended clipping
+* absence of obvious segmentation artifacts
+* appropriate handling of inserted silence
+* reasonable audio duration
+* consistent output format
+* reliable file generation
+* useful diagnostic information when generation fails
+
+Audio post-processing must not be applied automatically unless it serves a
+defined purpose and has been tested for artifacts.
+
+If multiple audio segments are generated, the engine must handle transitions,
+sample rates, channel layouts, silence, and final file assembly consistently.
+
+============================================================
+15. PROPOSED INTERFACE WITH THE STORY DIRECTOR
+==============================================
+
+The final interface should use a structured voice-direction object rather
+than free-form implementation instructions.
+
+## CONCEPTUAL EXAMPLE ONLY
+
+{
+"delivery_style": "reflective",
+"emotion": "curiosity",
+"intensity": "restrained",
+"pace": "measured",
+"vocal_quality": ["warm", "understated"],
+"emphasis": [
+{
+"target": "another world",
+"strength": "moderate"
+}
+],
+"pauses": [
+{
+"anchor": "after_sentence",
+"duration": "medium"
+}
+]
+}
+
+This example is a design sketch, not a finalized data contract.
+
+Before integrating it with the Story Director, define:
+
+* the authoritative field names
+* required versus optional fields
+* permitted values
+* defaults
+* target and anchor matching rules
+* validation behavior
+* versioning strategy
+* backend capability reporting
+* error and fallback behavior
+
+The Voice Engine's schema must be the single source of truth consumed by
+the Story Director. Do not maintain independent, conflicting lists of
+allowed values in multiple files.
+
+============================================================
+16. FUTURE IMPLEMENTATION PLAN
+==============================
+
+When development begins:
+
+1. Inspect the current TTS integrations and the exact installed APIs.
+2. Finalize the shared voice-direction schema.
+3. Define a backend-independent Voice Engine contract.
+4. Implement the F5-TTS adapter.
+5. Implement the Kokoro fallback adapter.
+6. Implement validation, capability reporting, and diagnostics.
+7. Implement section-level voice directions.
+8. Add phrase-level emphasis and pause handling.
+9. Test supported directions with representative scripts.
+10. Calibrate backend-specific mappings through actual listening tests.
+11. Integrate the schema into the Story Director.
+12. Verify consistent voice identity and delivery across adjacent sections.
+13. Document which features are native, approximated, or unsupported.
+
+Do not finalize numeric mappings until the relevant backend interfaces and
+generated audio have been tested.
+
+============================================================
+17. DESIGN RULES TO PRESERVE
+============================
+
+* The Story Director chooses creative intent.
+* The Voice Engine owns voice-generation implementation.
+* Shared voice directions must use a controlled vocabulary.
+* The schema must be the single source of truth.
+* Backend-specific controls must remain behind backend adapters.
+* Never assume a backend supports a feature without verification.
+* Preserve spoken text unless a separate stage authorizes changes.
+* Keep voice identity distinct from delivery style and emotion.
+* Prefer a small number of meaningful directions over excessive micromanagement.
+* Apply emphasis and pauses selectively.
+* Preserve intelligibility and naturalness.
+* Validate directions in code.
+* Use explicit fallback behavior and useful diagnostics.
+* Keep this placeholder documentation-only until the actual implementation
+  is deliberately started.
+
+END OF PLACEHOLDER SPECIFICATION
+"""
